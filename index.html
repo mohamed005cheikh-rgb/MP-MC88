@@ -1,938 +1,873 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>MP88 | Vinyl Player</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>MP88 — Vinyl Studio</title>
 
-    <!-- ===== GOOGLE FONTS ===== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Elite&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        /* ============================================================
-                   🌙 RESET & ROOT
-                ============================================================ */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+<style>
+/* ============================================================
+   RESET & ROOT
+============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --font-main:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --font-vintage:'Cinzel Decorative',serif;
+  --font-aesthetic:'Playfair Display',serif;
+  --font-type:'Special Elite',cursive;
 
-        :root {
-            /* Fonts */
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            --font-vintage: 'Cinzel Decorative', serif;
-            --font-aesthetic: 'Playfair Display', serif;
-            --font-typewriter: 'Special Elite', cursive;
-            
-            /* Dark Royal (Default) */
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: rgba(255, 255, 255, 0.04);
-            --bg-hover: rgba(255, 255, 255, 0.06);
-            --border-glass: rgba(212, 175, 55, 0.12);
-            --text-primary: #f3efe6;
-            --text-secondary: rgba(243, 239, 230, 0.5);
-            --text-muted: rgba(243, 239, 230, 0.2);
-            --accent: #d4af37;
-            --accent-glow: rgba(212, 175, 55, 0.15);
-            --accent-hover: #e6c55c;
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            --radius: 24px;
-            --transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            
-            --vinyl-bg: #0d0d0d;
-            --vinyl-label: #2c1d0c;
-        }
+  --bg-primary:#0a0a0f;
+  --bg-secondary:#12121a;
+  --bg-card:rgba(255,255,255,.04);
+  --bg-hover:rgba(255,255,255,.06);
+  --border-glass:rgba(212,175,55,.14);
+  --text-primary:#f3efe6;
+  --text-secondary:rgba(243,239,230,.55);
+  --text-muted:rgba(243,239,230,.22);
+  --accent:#d4af37;
+  --accent-glow:rgba(212,175,55,.16);
+  --accent-hover:#e6c55c;
+  --danger:#e0645a;
+  --ok:#6bbf8a;
+  --shadow:0 20px 60px rgba(0,0,0,.5);
+  --radius:22px;
+  --transition:.5s cubic-bezier(.25,1,.5,1);
+  --vinyl-bg:#0d0d0d;
+  --vinyl-label:#2c1d0c;
+}
+[data-theme="light"]{
+  --bg-primary:#f7f4ed; --bg-secondary:#fff; --bg-card:rgba(255,255,255,.75);
+  --bg-hover:rgba(0,0,0,.045); --border-glass:rgba(139,115,85,.18);
+  --text-primary:#2c251e; --text-secondary:rgba(44,37,30,.55); --text-muted:rgba(44,37,30,.28);
+  --accent:#8c6d36; --accent-glow:rgba(140,109,54,.13); --accent-hover:#6e542a;
+  --shadow:0 20px 60px rgba(44,37,30,.1); --vinyl-bg:#1a1818; --vinyl-label:#4a3b32;
+}
+[data-theme="ocean"]{
+  --bg-primary:#0a1628; --bg-secondary:#0f2040; --bg-card:rgba(255,255,255,.04);
+  --bg-hover:rgba(255,255,255,.06); --border-glass:rgba(100,200,255,.12);
+  --text-primary:#e8f4f8; --text-secondary:rgba(140,210,255,.5); --text-muted:rgba(140,210,255,.2);
+  --accent:#38bdf8; --accent-glow:rgba(56,189,248,.14); --accent-hover:#7dd3fc;
+  --shadow:0 20px 60px rgba(0,0,0,.6); --vinyl-bg:#08101a; --vinyl-label:#1a3a5a;
+}
+[data-theme="sunset"]{
+  --bg-primary:#1a0a0f; --bg-secondary:#2a1218; --bg-card:rgba(255,255,255,.04);
+  --bg-hover:rgba(255,255,255,.06); --border-glass:rgba(255,150,100,.12);
+  --text-primary:#f8ece8; --text-secondary:rgba(255,170,120,.5); --text-muted:rgba(255,170,120,.2);
+  --accent:#f97316; --accent-glow:rgba(249,115,22,.14); --accent-hover:#fb923c;
+  --shadow:0 20px 60px rgba(0,0,0,.6); --vinyl-bg:#140808; --vinyl-label:#3a2a28;
+}
 
-        /* ============================================================
-                   ☀️ LIGHT THEME
-                ============================================================ */
-        [data-theme="light"] {
-            --bg-primary: #f7f4ed;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.75);
-            --bg-hover: rgba(0, 0, 0, 0.04);
-            --border-glass: rgba(139, 115, 85, 0.15);
-            --text-primary: #2c251e;
-            --text-secondary: rgba(44, 37, 30, 0.5);
-            --text-muted: rgba(44, 37, 30, 0.25);
-            --accent: #8c6d36;
-            --accent-glow: rgba(140, 109, 54, 0.12);
-            --accent-hover: #6e542a;
-            --shadow: 0 20px 60px rgba(44, 37, 30, 0.08);
-            --vinyl-bg: #1a1818;
-            --vinyl-label: #4a3b32;
-        }
+body{
+  font-family:var(--font-main); background:var(--bg-primary); color:var(--text-primary);
+  min-height:100vh; display:flex; justify-content:center; align-items:flex-start;
+  transition:background-color var(--transition),color var(--transition);
+  -webkit-user-select:none; user-select:none;
+}
+::selection{background:var(--accent); color:var(--bg-primary);}
 
-        /* ============================================================
-                   🌊 OCEAN THEME
-                ============================================================ */
-        [data-theme="ocean"] {
-            --bg-primary: #0a1628;
-            --bg-secondary: #0f2040;
-            --bg-card: rgba(255, 255, 255, 0.04);
-            --bg-hover: rgba(255, 255, 255, 0.06);
-            --border-glass: rgba(100, 200, 255, 0.10);
-            --text-primary: #e8f4f8;
-            --text-secondary: rgba(100, 200, 255, 0.45);
-            --text-muted: rgba(100, 200, 255, 0.18);
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.12);
-            --accent-hover: #7dd3fc;
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-            --vinyl-bg: #08101a;
-            --vinyl-label: #1a3a5a;
-        }
+.app{
+  max-width:480px; width:100%; min-height:100vh;
+  background:var(--bg-card); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-left:1px solid var(--border-glass); border-right:1px solid var(--border-glass);
+  display:flex; flex-direction:column; position:relative;
+}
+@media (min-width:481px){
+  body{padding:24px 0;}
+  .app{min-height:92vh; border-radius:var(--radius); border:1px solid var(--border-glass); box-shadow:var(--shadow);}
+}
 
-        /* ============================================================
-                   🌅 SUNSET THEME
-                ============================================================ */
-        [data-theme="sunset"] {
-            --bg-primary: #1a0a0f;
-            --bg-secondary: #2a1218;
-            --bg-card: rgba(255, 255, 255, 0.04);
-            --bg-hover: rgba(255, 255, 255, 0.06);
-            --border-glass: rgba(255, 150, 100, 0.10);
-            --text-primary: #f8ece8;
-            --text-secondary: rgba(255, 150, 100, 0.45);
-            --text-muted: rgba(255, 150, 100, 0.18);
-            --accent: #f97316;
-            --accent-glow: rgba(249, 115, 22, 0.12);
-            --accent-hover: #fb923c;
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-            --vinyl-bg: #140808;
-            --vinyl-label: #3a2a28;
-        }
+/* ===== HEADER ===== */
+.header{display:flex;justify-content:space-between;align-items:center;padding:22px 20px 14px;}
+.header h1{
+  font-family:var(--font-vintage); font-size:26px; letter-spacing:2px; display:flex; align-items:center; gap:10px;
+  background:linear-gradient(120deg,var(--accent) 0%,var(--text-primary) 50%,var(--accent) 100%);
+  background-size:200% auto; color:transparent; -webkit-background-clip:text; background-clip:text;
+  animation:shine 5s linear infinite;
+}
+@keyframes shine{to{background-position:200% center;}}
+.header h1 .badge{
+  font-family:var(--font-type); font-size:9px; background:var(--bg-hover); border:1px solid var(--border-glass);
+  color:var(--text-secondary); -webkit-text-fill-color:var(--text-secondary); padding:4px 9px;
+  border-radius:20px; letter-spacing:1px; text-transform:uppercase;
+}
+.header-actions{display:flex;gap:8px;}
+.icon-btn{
+  background:var(--bg-hover); border:1px solid var(--border-glass); color:var(--text-secondary);
+  width:34px;height:34px;border-radius:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:.25s ease;
+}
+.icon-btn:active{transform:scale(.88);}
+.icon-btn:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-glow);}
+.icon-btn.on{color:var(--accent);border-color:var(--accent);background:var(--accent-glow);}
 
-        /* ============================================================
-                   🌍 APP BODY
-                ============================================================ */
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            transition: background-color var(--transition), color var(--transition);
-            -webkit-user-select: none;
-            user-select: none;
-            overflow: hidden;
-        }
+/* ===== TABS (ticket-style) ===== */
+.tabs{display:flex;gap:6px;padding:0 20px 16px;}
+.tab{
+  flex:1; text-align:center; font-family:var(--font-type); font-size:11px; letter-spacing:1px;
+  text-transform:uppercase; padding:10px 4px; border-radius:14px; cursor:pointer; color:var(--text-secondary);
+  border:1px dashed var(--border-glass); background:var(--bg-hover); transition:.25s ease;
+}
+.tab.active{color:var(--bg-primary); background:var(--accent); border-color:var(--accent); font-weight:700;}
 
-        /* ============================================================
-                   🪟 MAIN CONTAINER
-                ============================================================ */
-        .container {
-            max-width: 480px;
-            width: 100%;
-            background-color: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            padding: 32px 24px 20px 24px;
-            box-shadow: var(--shadow);
-            transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            max-height: 95vh;
-        }
+.view{display:none; padding:0 20px 20px; flex:1; flex-direction:column; animation:fadeIn .4s ease;}
+.view.active{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
-        /* ============================================================
-                   📋 HEADER
-                ============================================================ */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
+/* ===== UPLOAD ===== */
+.upload-area{
+  border:2px dashed var(--border-glass); border-radius:var(--radius); padding:30px 18px; text-align:center;
+  margin-bottom:10px; cursor:pointer; background:var(--bg-hover); transition:.25s ease;
+}
+.upload-area:active{transform:scale(.98);}
+.upload-area svg{color:var(--text-secondary); margin-bottom:10px;}
+.upload-area strong{font-family:var(--font-aesthetic); font-style:italic; font-size:16px; color:var(--text-primary); display:block;}
+.upload-area .sub{font-family:var(--font-type); font-size:10px; color:var(--text-muted); margin-top:6px; letter-spacing:1px;}
+input[type="file"]{display:none;}
 
-        /* The Animated Logo */
-        .header h1 {
-            font-family: var(--font-vintage);
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin: 0;
-            
-            /* Gradient Shine Effect */
-            background: linear-gradient(
-                120deg, 
-                var(--accent) 0%, 
-                var(--text-primary) 50%, 
-                var(--accent) 100%
-            );
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: shine 4s linear infinite;
-            
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+/* ===== PLAYER ===== */
+.player{display:none; flex-direction:column;}
+.player.active{display:flex;}
+.vinyl-container{display:flex;justify-content:center;margin:6px 0 18px;position:relative;padding:6px;}
+.vinyl{
+  width:200px;height:200px;border-radius:50%;background:var(--vinyl-bg);
+  background-image:repeating-radial-gradient(circle at center,rgba(255,255,255,.01) 0,rgba(255,255,255,.01) 2px,transparent 2px,transparent 4px);
+  box-shadow:0 10px 40px rgba(0,0,0,.4), inset 0 0 20px rgba(0,0,0,.8); border:1px solid rgba(255,255,255,.05);
+  position:relative; animation:spin 5s linear infinite; animation-play-state:paused;
+  display:flex;align-items:center;justify-content:center; will-change:transform;
+}
+.vinyl.spinning{animation-play-state:running;}
+.vinyl .label{
+  width:78px;height:78px;border-radius:50%; background:radial-gradient(circle at top left,var(--accent),var(--vinyl-label));
+  display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:inset 0 0 10px rgba(0,0,0,.5);padding:8px;position:relative;
+}
+.vinyl .label::before{content:'';position:absolute;width:13px;height:13px;background:var(--bg-primary);border-radius:50%;border:1px solid rgba(0,0,0,.3);}
+.vinyl .label .title{font-family:var(--font-vintage);font-size:9px;color:rgba(255,255,255,.92);font-weight:700;line-height:1.2;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.tone-arm{position:absolute;top:2%;right:18%;width:64px;height:6px;background:linear-gradient(90deg,#ccc,#888);border-radius:10px;transform-origin:right center;transform:rotate(-50deg);transition:transform .6s cubic-bezier(.4,0,.2,1);box-shadow:2px 4px 10px rgba(0,0,0,.5);z-index:10;}
+.tone-arm::before{content:'';position:absolute;left:-14px;top:-6px;width:18px;height:16px;background:#222;border-radius:4px;border:1px solid #555;}
+.tone-arm.active{transform:rotate(-15deg);}
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+/* 8D orbit ring shown when spatial fx active */
+.orbit-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);top:50%;left:50%;opacity:0;transition:opacity .3s ease;pointer-events:none;}
+.orbit-dot.on{opacity:1; animation:orbit 6s linear infinite;}
+@keyframes orbit{
+  from{transform:translate(-50%,-50%) rotate(0deg) translateX(118px) rotate(0deg);}
+  to{transform:translate(-50%,-50%) rotate(360deg) translateX(118px) rotate(-360deg);}
+}
 
-        .header h1 .badge {
-            font-family: var(--font-typewriter);
-            font-size: 10px;
-            background-color: var(--bg-hover);
-            border: 1px solid var(--border-glass);
-            color: var(--text-secondary);
-            padding: 4px 10px;
-            border-radius: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 600;
-            -webkit-text-fill-color: var(--text-secondary); /* Reset text color for badge */
-        }
+.song-info{text-align:center;margin-bottom:12px;}
+.song-info h3{font-family:var(--font-aesthetic);font-size:19px;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 8px;}
 
-        .header-actions {
-            display: flex;
-            gap: 10px;
-        }
+.progress-container{margin:6px 0 16px;}
+.progress-bar{width:100%;height:6px;background:var(--bg-hover);border-radius:6px;position:relative;cursor:pointer;}
+.progress-bar .progress{width:0%;height:100%;background:var(--accent);border-radius:6px;position:relative;}
+.time-info{display:flex;justify-content:space-between;font-family:var(--font-type);font-size:10px;color:var(--text-muted);margin-top:7px;}
 
-        .header-actions button {
-            background-color: var(--bg-hover);
-            border: 1px solid var(--border-glass);
-            color: var(--text-secondary);
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
+.controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding:0 6px;}
+.controls button{background:none;border:none;color:var(--text-secondary);cursor:pointer;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.2s ease;}
+.controls button:active{transform:scale(.85);background:var(--bg-hover);}
+.controls button.active-btn{color:var(--accent);}
+.controls button.play-btn{background:var(--accent);color:var(--bg-primary);width:60px;height:60px;box-shadow:0 10px 25px var(--accent-glow);}
 
-        .header-actions button:active {
-            transform: scale(0.9);
-        }
+/* ===== EQ / FX chips ===== */
+.section-label{font-family:var(--font-type);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin:4px 0 8px 2px;}
+.chip-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;-ms-overflow-style:none;scrollbar-width:none;}
+.chip-row::-webkit-scrollbar{display:none;}
+.chip{
+  flex:0 0 auto; padding:8px 14px; border-radius:20px; font-size:12px; font-weight:600;
+  background:var(--bg-hover); border:1px solid var(--border-glass); color:var(--text-secondary); cursor:pointer; white-space:nowrap; transition:.2s ease;
+}
+.chip.active{background:var(--accent); color:var(--bg-primary); border-color:var(--accent);}
+.chip.fx8d.active,.chip.fx4d.active{background:linear-gradient(135deg,var(--accent),var(--accent-hover));}
 
-        .header-actions button:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-            background-color: var(--accent-glow);
-        }
+.playlist-section{flex:1;border-top:1px solid var(--border-glass);padding-top:12px;overflow-y:auto;max-height:150px;}
+.playlist-section::-webkit-scrollbar{width:4px;}
+.playlist-section::-webkit-scrollbar-thumb{background:var(--bg-hover);border-radius:10px;}
+.playlist{display:flex;flex-direction:column;gap:3px;}
+.playlist-item{display:flex;align-items:center;padding:10px 12px;border-radius:14px;cursor:pointer;gap:10px;transition:.2s ease;}
+.playlist-item.active{background:var(--bg-hover);}
+.playlist-item .title{flex:1;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.playlist-item .duration{font-family:var(--font-type);font-size:10px;color:var(--text-muted);}
+.playlist-item.active .title{color:var(--accent);}
 
-        /* ============================================================
-                   📁 UPLOAD
-                ============================================================ */
-        .upload-area {
-            border: 2px dashed var(--border-glass);
-            border-radius: var(--radius);
-            padding: 32px 20px;
-            text-align: center;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background-color: var(--bg-hover);
-        }
+/* ===== LYRICS VIEW ===== */
+.lyrics-track-name{font-family:var(--font-aesthetic);font-style:italic;font-size:17px;text-align:center;margin-bottom:14px;}
+.lyrics-actions{display:flex;gap:8px;margin-bottom:14px;}
+.btn{
+  flex:1; padding:11px; border-radius:14px; font-weight:600; font-size:13px; cursor:pointer; border:1px solid var(--border-glass);
+  background:var(--bg-hover); color:var(--text-primary); transition:.2s ease; text-align:center;
+}
+.btn:active{transform:scale(.97);}
+.btn.primary{background:var(--accent); color:var(--bg-primary); border-color:var(--accent);}
+.btn.ghost{background:transparent;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
 
-        .upload-area:active {
-            transform: scale(0.98);
-        }
+.loading-wrap{display:none; flex-direction:column; align-items:center; padding:26px 10px; gap:10px;}
+.loading-wrap.active{display:flex;}
+.notes-anim{position:relative;width:100%;height:60px;}
+.note{position:absolute;bottom:0;font-size:20px;color:var(--accent);opacity:0;animation:floatNote 2.4s ease-in infinite;}
+@keyframes floatNote{
+  0%{opacity:0;transform:translateY(0) rotate(0deg);}
+  15%{opacity:1;}
+  100%{opacity:0;transform:translateY(-56px) rotate(20deg);}
+}
+.loading-text{font-family:var(--font-type);font-size:12px;color:var(--text-secondary);text-align:center;}
+.loading-eta{font-size:11px;color:var(--text-muted);}
 
-        .upload-area svg {
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            transition: color 0.3s ease;
-        }
+.lyrics-box{
+  flex:1; min-height:180px; background:var(--bg-hover); border:1px solid var(--border-glass); border-radius:16px;
+  padding:16px; font-family:var(--font-aesthetic); font-size:15px; line-height:1.9; white-space:pre-wrap;
+  overflow-y:auto; -webkit-user-select:text; user-select:text; margin-bottom:12px;
+}
+.lyrics-empty{color:var(--text-muted); font-family:var(--font-main); font-size:13px; text-align:center; padding:20px 6px;}
+.lyrics-footer-actions{display:flex;gap:8px;}
 
-        .upload-area p {
-            font-family: var(--font-main);
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
+.fix-popover{
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:50; align-items:flex-end; justify-content:center;
+}
+.fix-popover.active{display:flex;}
+.fix-card{
+  background:var(--bg-secondary); border:1px solid var(--border-glass); border-radius:20px 20px 0 0; width:100%; max-width:480px;
+  padding:20px; box-shadow:var(--shadow);
+}
+.fix-card h4{font-family:var(--font-aesthetic);font-style:italic;margin-bottom:10px;}
+.fix-card .selected-snip{font-size:12px;color:var(--text-muted);margin-bottom:10px;background:var(--bg-hover);padding:8px 10px;border-radius:10px;}
+.fix-card textarea{
+  width:100%;min-height:70px;background:var(--bg-hover);border:1px solid var(--border-glass);border-radius:12px;
+  padding:10px;color:var(--text-primary);font-family:var(--font-main);font-size:13px;resize:vertical;margin-bottom:12px;
+}
+.fix-card .row{display:flex;gap:8px;}
 
-        .upload-area strong {
-            color: var(--text-primary);
-            font-family: var(--font-aesthetic);
-            font-size: 16px;
-            font-style: italic;
-        }
+/* ===== CONVERT VIEW ===== */
+.convert-drop{border:2px dashed var(--border-glass);border-radius:var(--radius);padding:26px 16px;text-align:center;margin-bottom:16px;background:var(--bg-hover);cursor:pointer;}
+.format-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.format-chip{padding:9px 16px;border-radius:14px;border:1px solid var(--border-glass);background:var(--bg-hover);color:var(--text-secondary);font-size:12px;font-weight:700;cursor:pointer;}
+.format-chip.active{background:var(--accent);color:var(--bg-primary);border-color:var(--accent);}
+.convert-progress-wrap{display:none;margin-bottom:14px;}
+.convert-progress-wrap.active{display:block;}
+.convert-progress-bar{width:100%;height:8px;background:var(--bg-hover);border-radius:8px;overflow:hidden;}
+.convert-progress-fill{width:0%;height:100%;background:var(--accent);transition:width .2s ease;}
+.convert-file-name{font-size:12px;color:var(--text-secondary);margin-bottom:10px;text-align:center;font-family:var(--font-type);}
+.result-card{display:none;background:var(--bg-hover);border:1px solid var(--border-glass);border-radius:16px;padding:16px;text-align:center;margin-top:6px;}
+.result-card.active{display:block;}
 
-        .upload-area .sub {
-            font-family: var(--font-typewriter);
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 8px;
-            letter-spacing: 1px;
-        }
+.toast{
+  position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--accent); color:var(--bg-primary);
+  padding:10px 18px; border-radius:20px; font-size:13px; font-weight:600; opacity:0; pointer-events:none; transition:.3s ease; z-index:100; box-shadow:var(--shadow);
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
-        .upload-area input[type="file"] {
-            display: none;
-        }
+.copyright{font-family:var(--font-type);font-size:9px;color:var(--text-muted);text-align:center;padding:16px 20px 20px;letter-spacing:1px;opacity:.6;text-transform:uppercase;}
 
-        /* ============================================================
-                   💿 VINYL PLAYER
-                ============================================================ */
-        .player {
-            display: none;
-            flex-direction: column;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .player.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .vinyl-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 24px;
-            position: relative;
-            padding: 10px;
-        }
-
-        .vinyl {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background-color: var(--vinyl-bg);
-            background-image: 
-                repeating-radial-gradient(
-                    circle at center, 
-                    rgba(255,255,255,0.01) 0, 
-                    rgba(255,255,255,0.01) 2px, 
-                    transparent 2px, 
-                    transparent 4px
-                );
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0,0,0,0.8);
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            animation: spin 5s linear infinite;
-            animation-play-state: paused;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            will-change: transform;
-        }
-
-        .vinyl.spinning {
-            animation-play-state: running;
-        }
-
-        .vinyl .label {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            background: radial-gradient(circle at top left, var(--accent), var(--vinyl-label));
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            padding: 8px;
-            position: relative;
-        }
-
-        .vinyl .label::before {
-            content: '';
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            background-color: var(--bg-primary);
-            border-radius: 50%;
-            border: 1px solid rgba(0,0,0,0.3);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .vinyl .label .title {
-            font-family: var(--font-vintage);
-            font-size: 10px;
-            color: rgba(255,255,255,0.9);
-            font-weight: bold;
-            line-height: 1.2;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-top: 24px; 
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* ===== TONE ARM ===== */
-        .tone-arm {
-            position: absolute;
-            top: 5%;
-            right: 15%;
-            width: 70px;
-            height: 6px;
-            background: linear-gradient(90deg, #ccc, #888);
-            border-radius: 10px;
-            transform-origin: right center;
-            transform: rotate(-50deg);
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
-            z-index: 10;
-        }
-        
-        .tone-arm::before {
-            content: '';
-            position: absolute;
-            left: -15px;
-            top: -6px;
-            width: 20px;
-            height: 18px;
-            background: #222;
-            border-radius: 4px;
-            border: 1px solid #555;
-        }
-
-        .tone-arm.active {
-            transform: rotate(-15deg);
-        }
-
-        /* ============================================================
-                   🎵 SONG INFO
-                ============================================================ */
-        .song-info {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .song-info h3 {
-            font-family: var(--font-aesthetic);
-            font-size: 22px;
-            font-style: italic;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding: 0 10px;
-            color: var(--text-primary);
-        }
-
-        /* ============================================================
-                   📊 PROGRESS (INTERACTIVE)
-                ============================================================ */
-        .progress-container {
-            margin: 10px 0 24px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px; /* Slightly thicker for easier tapping */
-            background-color: var(--bg-hover);
-            border-radius: 6px;
-            position: relative;
-            cursor: pointer; /* Indicates it's clickable */
-            transition: height 0.2s ease;
-        }
-        
-        .progress-bar:hover {
-            height: 8px; /* Expands slightly when hovering */
-        }
-
-        .progress-bar .progress {
-            width: 0%;
-            height: 100%;
-            background: var(--accent);
-            border-radius: 6px;
-            position: relative;
-            pointer-events: none;
-        }
-
-        /* Little dot on the progress bar */
-        .progress-bar .progress::after {
-            content: '';
-            position: absolute;
-            right: -6px;
-            top: 50%;
-            transform: translateY(-50%) scale(0);
-            width: 12px;
-            height: 12px;
-            background-color: var(--text-primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-glow);
-            transition: transform 0.2s ease;
-        }
-
-        .progress-bar:hover .progress::after {
-            transform: translateY(-50%) scale(1);
-        }
-
-        .time-info {
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-typewriter);
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 8px;
-            font-variant-numeric: tabular-nums;
-            font-weight: 500;
-        }
-
-        /* ============================================================
-                   🎛️ CONTROLS
-                ============================================================ */
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 0 10px;
-        }
-
-        .controls button {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .controls button:active {
-            transform: scale(0.85);
-            background-color: var(--bg-hover);
-        }
-
-        .controls button.active-btn {
-            color: var(--accent);
-        }
-
-        .controls button.play-btn {
-            background-color: var(--accent);
-            color: var(--bg-primary);
-            width: 65px;
-            height: 65px;
-            box-shadow: 0 10px 25px var(--accent-glow);
-        }
-
-        .controls button.play-btn:active {
-            transform: scale(0.9);
-            background-color: var(--accent-hover);
-        }
-
-        /* ============================================================
-                   📋 PLAYLIST
-                ============================================================ */
-        .playlist-section {
-            flex: 1;
-            border-top: 1px solid var(--border-glass);
-            padding-top: 16px;
-            overflow-y: auto;
-            max-height: 180px;
-        }
-
-        .playlist-section::-webkit-scrollbar { width: 4px; }
-        .playlist-section::-webkit-scrollbar-track { background: transparent; }
-        .playlist-section::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 10px; }
-
-        .playlist {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .playlist-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 14px;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            gap: 12px;
-        }
-
-        .playlist-item:active {
-            transform: scale(0.98);
-        }
-
-        .playlist-item.active {
-            background-color: var(--bg-hover);
-        }
-
-        .playlist-item .title {
-            flex: 1;
-            font-family: var(--font-main);
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .playlist-item .duration {
-            font-family: var(--font-typewriter);
-            font-size: 11px;
-            color: var(--text-muted);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .playlist-item.active .title {
-            color: var(--accent);
-        }
-
-        /* ============================================================
-                   📜 COPYRIGHT (FOOTER)
-                ============================================================ */
-        .copyright {
-            font-family: var(--font-typewriter);
-            font-size: 9px;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 20px;
-            letter-spacing: 1px;
-            opacity: 0.6;
-            text-transform: uppercase;
-        }
-
-        /* ============================================================
-                   📱 RESPONSIVE
-                ============================================================ */
-        @media (max-width: 480px) {
-            body { padding: 0; }
-            .container { 
-                border-radius: 0; 
-                border: none;
-                max-height: 100vh;
-                height: 100vh;
-                padding: 40px 20px 20px;
-            }
-            .vinyl { width: 240px; height: 240px; }
-            .playlist-section { max-height: none; }
-        }
-    </style>
+@media(max-width:480px){
+  .vinyl{width:190px;height:190px;}
+}
+</style>
 </head>
 <body>
 
-    <div class="container">
+<div class="app">
 
-        <!-- ===== HEADER ===== -->
-        <div class="header">
-            <h1>
-                MP88 <span class="badge">Offline</span>
-            </h1>
-            <div class="header-actions">
-                <button id="themeToggle" title="Change Theme">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
-                </button>
-                <button id="clearBtn" title="Clear Music">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
-                </button>
-            </div>
-        </div>
+  <div class="header">
+    <h1>MP88 <span class="badge">Local · Offline</span></h1>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" title="Theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+      </button>
+      <button class="icon-btn" id="clearBtn" title="Clear">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+      </button>
+    </div>
+  </div>
 
-        <!-- ===== UPLOAD ===== -->
-        <div class="upload-area" id="uploadArea">
-            <label for="fileInput" style="cursor: pointer; display: block;">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <p>Drop your melodies or <strong>Browse</strong></p>
-                <p class="sub">MP3 • WAV • FLAC</p>
-            </label>
-            <input type="file" id="fileInput" multiple accept="audio/*" />
-        </div>
+  <div class="tabs">
+    <div class="tab active" data-view="playerView">Player</div>
+    <div class="tab" data-view="lyricsView">Lyrics</div>
+    <div class="tab" data-view="convertView">Convert</div>
+  </div>
 
-        <!-- ===== PLAYER ===== -->
-        <div class="player" id="player">
+  <!-- ================= PLAYER ================= -->
+  <div class="view active" id="playerView">
 
-            <div class="vinyl-container">
-                <div class="vinyl" id="vinyl">
-                    <div class="label">
-                        <span class="title" id="vinylTitle">Track</span>
-                    </div>
-                </div>
-                <div class="tone-arm" id="toneArm"></div>
-            </div>
-
-            <div class="song-info">
-                <h3 id="currentTitle">No song selected</h3>
-            </div>
-
-            <!-- INTERACTIVE Progress Bar -->
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBarContainer">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="time-info">
-                    <span id="currentTime">0:00</span>
-                    <span id="totalTime">0:00</span>
-                </div>
-            </div>
-
-            <div class="controls">
-                <!-- Shuffle -->
-                <button id="shuffleBtn">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg>
-                </button>
-                <!-- Previous -->
-                <button id="prevBtn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-                </button>
-                <!-- Play/Pause -->
-                <button class="play-btn" id="playBtn">
-                    <svg id="iconPlay" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="display: block; margin-left: 4px;"><path d="M8 5v14l11-7z"/></svg>
-                    <svg id="iconPause" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                </button>
-                <!-- Next -->
-                <button id="nextBtn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-                </button>
-                <!-- Repeat/Loop -->
-                <button id="repeatBtn">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
-                </button>
-            </div>
-
-            <!-- Playlist -->
-            <div class="playlist-section">
-                <div class="playlist" id="playlist"></div>
-            </div>
-            
-        </div>
-
-        <!-- ===== FOOTER ===== -->
-        <div class="copyright">© 2026 mohamed005cheikh@gmail.com | by MC</div>
-
+    <div class="upload-area" id="uploadArea">
+      <label for="fileInput" style="cursor:pointer;display:block;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+        <strong>Drop your melodies or Browse</strong>
+        <p class="sub">MP3 · WAV · M4A · FLAC · OGG</p>
+      </label>
+      <input type="file" id="fileInput" multiple accept="audio/*" />
     </div>
 
-    <script>
-        const state = {
-            playlist: [],
-            currentIndex: 0,
-            isPlaying: false,
-            isShuffled: false,
-            isRepeated: false,
-            themes: ['dark', 'light', 'ocean', 'sunset']
-        };
+    <div class="player" id="player">
+      <div class="vinyl-container">
+        <div class="vinyl" id="vinyl">
+          <div class="label"><span class="title" id="vinylTitle">Track</span></div>
+        </div>
+        <div class="tone-arm" id="toneArm"></div>
+        <div class="orbit-dot" id="orbitDot"></div>
+      </div>
 
-        const fileInput = document.getElementById('fileInput');
-        const uploadArea = document.getElementById('uploadArea');
-        const player = document.getElementById('player');
-        const playlistEl = document.getElementById('playlist');
-        
-        const currentTitle = document.getElementById('currentTitle');
-        const vinylTitle = document.getElementById('vinylTitle');
-        const vinyl = document.getElementById('vinyl');
-        const toneArm = document.getElementById('toneArm');
-        
-        const progressBarContainer = document.getElementById('progressBarContainer');
-        const progress = document.getElementById('progress');
-        const currentTimeEl = document.getElementById('currentTime');
-        const totalTimeEl = document.getElementById('totalTime');
-        
-        const playBtn = document.getElementById('playBtn');
-        const iconPlay = document.getElementById('iconPlay');
-        const iconPause = document.getElementById('iconPause');
-        
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const shuffleBtn = document.getElementById('shuffleBtn');
-        const repeatBtn = document.getElementById('repeatBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const themeToggle = document.getElementById('themeToggle');
+      <div class="song-info"><h3 id="currentTitle">No song selected</h3></div>
 
-        let audio = new Audio();
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBarContainer"><div class="progress" id="progress"></div></div>
+        <div class="time-info"><span id="currentTime">0:00</span><span id="totalTime">0:00</span></div>
+      </div>
 
-        // Theme Handling
-        let themeIndex = state.themes.indexOf(localStorage.getItem('theme') || 'dark');
-        if (themeIndex === -1) themeIndex = 0;
-        document.documentElement.setAttribute('data-theme', state.themes[themeIndex]);
+      <div class="controls">
+        <button id="shuffleBtn" title="Shuffle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></button>
+        <button id="prevBtn" title="Previous"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+        <button class="play-btn" id="playBtn" title="Play">
+          <svg id="iconPlay" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" style="margin-left:3px;"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="iconPause" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <button id="nextBtn" title="Next"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+        <button id="repeatBtn" title="Repeat"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></button>
+      </div>
 
-        themeToggle.addEventListener('click', () => {
-            themeIndex = (themeIndex + 1) % state.themes.length;
-            const newTheme = state.themes[themeIndex];
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
+      <div class="section-label">Equalizer presets</div>
+      <div class="chip-row" id="eqChips">
+        <div class="chip active" data-eq="flat">Flat</div>
+        <div class="chip" data-eq="bass">Bass Boost</div>
+        <div class="chip" data-eq="vocal">Vocal Boost</div>
+        <div class="chip" data-eq="treble">Treble</div>
+        <div class="chip" data-eq="rock">Rock</div>
+        <div class="chip" data-eq="pop">Pop</div>
+        <div class="chip" data-eq="classical">Classical</div>
+        <div class="chip" data-eq="lofi">Lo-Fi</div>
+      </div>
 
-        // File Uploading
-        function handleFiles(files) {
-            const audioFiles = Array.from(files).filter(f => f.type.startsWith('audio/'));
-            if (!audioFiles.length) return;
+      <div class="section-label">Spatial sound</div>
+      <div class="chip-row" id="fxChips">
+        <div class="chip active" data-fx="none">Off</div>
+        <div class="chip fx8d" data-fx="8d">8D Audio</div>
+        <div class="chip fx4d" data-fx="4d">4D Audio</div>
+        <div class="chip" data-fx="wide">Wide Stereo</div>
+      </div>
 
-            uploadArea.style.display = 'none';
-            player.classList.add('active');
+      <div class="playlist-section"><div class="playlist" id="playlist"></div></div>
+    </div>
+  </div>
 
-            audioFiles.forEach(file => {
-                state.playlist.push({
-                    name: file.name.replace(/\.[^/.]+$/, ''),
-                    url: URL.createObjectURL(file),
-                    duration: '--:--'
-                });
-            });
+  <!-- ================= LYRICS ================= -->
+  <div class="view" id="lyricsView">
+    <div class="lyrics-track-name" id="lyricsTrackName">Select a track first</div>
 
-            renderPlaylist();
-            if (state.playlist.length === audioFiles.length) loadSong(0); 
+    <div class="lyrics-actions">
+      <div class="btn primary" id="findLyricsBtn">🔎 Find lyrics online</div>
+      <div class="btn ghost" id="transcribeBtn">🎙️ Transcribe audio</div>
+    </div>
+
+    <div class="loading-wrap" id="loadingWrap">
+      <div class="notes-anim" id="notesAnim"></div>
+      <div class="loading-text" id="loadingText">Searching the internet…</div>
+      <div class="loading-eta" id="loadingEta">estimating time…</div>
+    </div>
+
+    <div class="lyrics-box" id="lyricsBox">
+      <div class="lyrics-empty">No lyrics yet. Upload a track, then tap “Find lyrics online” (needs internet) or “Transcribe audio” (runs fully on your device).<br><br>Once you have text: select any wrong part, then tap “Fix selection” below to correct it.</div>
+    </div>
+
+    <div class="lyrics-footer-actions">
+      <div class="btn ghost" id="fixSelectionBtn">✏️ Fix selection</div>
+      <div class="btn" id="copyLyricsBtn">📋 Copy lyrics</div>
+    </div>
+  </div>
+
+  <!-- ================= CONVERT ================= -->
+  <div class="view" id="convertView">
+    <div class="section-label">Video → Audio converter</div>
+    <div class="convert-drop" id="convertDrop">
+      <label for="videoInput" style="cursor:pointer;display:block;">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+        <strong style="font-family:var(--font-aesthetic);font-style:italic;">Drop a video or Browse</strong>
+        <p class="sub">MP4 · MOV · MKV · WEBM</p>
+      </label>
+      <input type="file" id="videoInput" accept="video/*" />
+    </div>
+
+    <div class="convert-file-name" id="convertFileName"></div>
+
+    <div class="section-label">Output format</div>
+    <div class="format-row" id="formatRow">
+      <div class="format-chip active" data-fmt="mp3">MP3</div>
+      <div class="format-chip" data-fmt="wav">WAV</div>
+      <div class="format-chip" data-fmt="m4a">M4A</div>
+      <div class="format-chip" data-fmt="ogg">OGG</div>
+    </div>
+
+    <div class="btn primary" id="convertBtn" style="margin-bottom:14px;">Convert to audio</div>
+
+    <div class="convert-progress-wrap" id="convertProgressWrap">
+      <div class="convert-progress-bar"><div class="convert-progress-fill" id="convertProgressFill"></div></div>
+      <div class="loading-text" id="convertProgressText" style="margin-top:8px;">Loading converter engine…</div>
+    </div>
+
+    <div class="result-card" id="resultCard">
+      <div class="loading-text" style="margin-bottom:10px;">✅ Your audio is ready</div>
+      <a class="btn primary" id="downloadResultBtn" download style="display:block;text-decoration:none;">⬇️ Download</a>
+    </div>
+  </div>
+
+  <div class="fix-popover" id="fixPopover">
+    <div class="fix-card">
+      <h4>Fix this part</h4>
+      <div class="selected-snip" id="selectedSnip">—</div>
+      <textarea id="fixTextarea" placeholder="Type the correct words here…"></textarea>
+      <div class="row">
+        <div class="btn ghost" id="fixCancelBtn" style="flex:1;">Cancel</div>
+        <div class="btn primary" id="fixApplyBtn" style="flex:1;">Apply fix</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Saved</div>
+
+  <div class="copyright">© 2026 mohamed005cheikh@gmail.com · Developed by MC88</div>
+</div>
+
+<script>
+/* ============================================================
+   STATE
+============================================================ */
+const state = {
+  playlist: [],
+  currentIndex: 0,
+  isPlaying: false,
+  isShuffled: false,
+  isRepeated: false,
+  themes: ['dark','light','ocean','sunset'],
+  eq: 'flat',
+  fx: 'none'
+};
+
+const $ = id => document.getElementById(id);
+
+/* ============================================================
+   THEME
+============================================================ */
+let themeIndex = state.themes.indexOf(localStorage.getItem('mp88-theme') || 'dark');
+if (themeIndex === -1) themeIndex = 0;
+document.documentElement.setAttribute('data-theme', state.themes[themeIndex]);
+$('themeToggle').addEventListener('click', () => {
+  themeIndex = (themeIndex + 1) % state.themes.length;
+  const t = state.themes[themeIndex];
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('mp88-theme', t);
+});
+
+/* ============================================================
+   TABS
+============================================================ */
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    $(tab.dataset.view).classList.add('active');
+    if (tab.dataset.view === 'lyricsView') refreshLyricsTrackName();
+  });
+});
+
+function showToast(msg){
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(showToast._h);
+  showToast._h = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+/* ============================================================
+   AUDIO ENGINE (Web Audio API — equalizer + spatial fx)
+============================================================ */
+let audio = new Audio();
+audio.crossOrigin = 'anonymous';
+let actx = null, srcNode = null, lowShelf, mid1, mid2, highShelf, panner, gainNode;
+let spatialRAF = null, spatialStart = 0;
+
+function ensureGraph(){
+  if (actx) return;
+  actx = new (window.AudioContext || window.webkitAudioContext)();
+  srcNode = actx.createMediaElementSource(audio);
+
+  lowShelf = actx.createBiquadFilter(); lowShelf.type='lowshelf'; lowShelf.frequency.value=200;
+  mid1 = actx.createBiquadFilter(); mid1.type='peaking'; mid1.frequency.value=1000; mid1.Q.value=1;
+  mid2 = actx.createBiquadFilter(); mid2.type='peaking'; mid2.frequency.value=3000; mid2.Q.value=1;
+  highShelf = actx.createBiquadFilter(); highShelf.type='highshelf'; highShelf.frequency.value=6000;
+  panner = actx.createStereoPanner();
+  gainNode = actx.createGain(); gainNode.gain.value = 1;
+
+  srcNode.connect(lowShelf).connect(mid1).connect(mid2).connect(highShelf).connect(panner).connect(gainNode).connect(actx.destination);
+  applyEQ(state.eq);
+  applyFX(state.fx);
+}
+
+const EQ_PRESETS = {
+  flat:      {low:0, mid1:0, mid2:0, high:0},
+  bass:      {low:8, mid1:1, mid2:-1, high:-1},
+  vocal:     {low:-2, mid1:5, mid2:4, high:1},
+  treble:    {low:-2, mid1:0, mid2:2, high:7},
+  rock:      {low:5, mid1:-2, mid2:2, high:4},
+  pop:       {low:2, mid1:3, mid2:1, high:3},
+  classical: {low:3, mid1:0, mid2:0, high:3},
+  lofi:      {low:4, mid1:-3, mid2:-4, high:-6}
+};
+function applyEQ(name){
+  state.eq = name;
+  if (!actx) return;
+  const p = EQ_PRESETS[name] || EQ_PRESETS.flat;
+  const t = actx.currentTime;
+  lowShelf.gain.linearRampToValueAtTime(p.low, t+.25);
+  mid1.gain.linearRampToValueAtTime(p.mid1, t+.25);
+  mid2.gain.linearRampToValueAtTime(p.mid2, t+.25);
+  highShelf.gain.linearRampToValueAtTime(p.high, t+.25);
+}
+document.querySelectorAll('#eqChips .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('#eqChips .chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    ensureGraph();
+    applyEQ(chip.dataset.eq);
+  });
+});
+
+function applyFX(name){
+  state.fx = name;
+  $('orbitDot').classList.toggle('on', name==='8d'||name==='4d');
+  if (spatialRAF) { cancelAnimationFrame(spatialRAF); spatialRAF=null; }
+  if (!actx) return;
+  if (name === 'none'){ panner.pan.value = 0; return; }
+  if (name === 'wide'){ panner.pan.value = 0; startWideStereo(); return; }
+  spatialStart = actx.currentTime;
+  const period = name === '8d' ? 9 : 4.5; // seconds per full rotation
+  const loop = () => {
+    const t = actx.currentTime - spatialStart;
+    const angle = (t / period) * Math.PI * 2;
+    panner.pan.value = Math.sin(angle);
+    gainNode.gain.value = 0.85 + 0.15*Math.cos(angle);
+    spatialRAF = requestAnimationFrame(loop);
+  };
+  loop();
+}
+function startWideStereo(){
+  const loop = () => {
+    if (state.fx !== 'wide') return;
+    const t = actx.currentTime;
+    panner.pan.value = Math.sin(t*0.6) * 0.35;
+    spatialRAF = requestAnimationFrame(loop);
+  };
+  loop();
+}
+document.querySelectorAll('#fxChips .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('#fxChips .chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    ensureGraph();
+    applyFX(chip.dataset.fx);
+  });
+});
+
+/* ============================================================
+   FILE UPLOAD / PLAYLIST
+============================================================ */
+const fileInput = $('fileInput'), uploadArea = $('uploadArea'), player = $('player'), playlistEl = $('playlist');
+const currentTitle = $('currentTitle'), vinylTitle = $('vinylTitle'), vinyl = $('vinyl'), toneArm = $('toneArm');
+const progressBarContainer = $('progressBarContainer'), progress = $('progress'), currentTimeEl = $('currentTime'), totalTimeEl = $('totalTime');
+const playBtn = $('playBtn'), iconPlay = $('iconPlay'), iconPause = $('iconPause');
+
+function handleFiles(files){
+  const audioFiles = Array.from(files).filter(f => f.type.startsWith('audio/'));
+  if (!audioFiles.length) return;
+  uploadArea.style.display = 'none';
+  player.classList.add('active');
+  const startAt = state.playlist.length;
+  audioFiles.forEach(file=>{
+    state.playlist.push({ name: file.name.replace(/\.[^/.]+$/, ''), url: URL.createObjectURL(file), duration: '--:--', lyrics: '' });
+  });
+  renderPlaylist();
+  if (startAt === 0) loadSong(0);
+}
+fileInput.addEventListener('change', e=>{ handleFiles(e.target.files); fileInput.value=''; });
+['dragover','drop'].forEach(evt=>{
+  uploadArea.addEventListener(evt, e=>{ e.preventDefault(); if(evt==='drop') handleFiles(e.dataTransfer.files); });
+});
+
+function renderPlaylist(){
+  playlistEl.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  state.playlist.forEach((song,i)=>{
+    const div = document.createElement('div');
+    div.className = 'playlist-item' + (i===state.currentIndex ? ' active' : '');
+    div.innerHTML = `<div class="title">${song.name}</div><div class="duration">${song.duration}</div>`;
+    div.addEventListener('click', ()=> loadSong(i));
+    frag.appendChild(div);
+  });
+  playlistEl.appendChild(frag);
+}
+
+function loadSong(index){
+  if (index<0 || index>=state.playlist.length) return;
+  state.currentIndex = index;
+  const song = state.playlist[index];
+  audio.src = song.url; audio.load();
+  currentTitle.textContent = song.name;
+  vinylTitle.textContent = song.name.length>18 ? song.name.slice(0,18)+'…' : song.name;
+  audio.addEventListener('loadedmetadata', ()=>{
+    song.duration = formatTime(audio.duration);
+    totalTimeEl.textContent = song.duration;
+    renderPlaylist();
+  }, { once:true });
+  ensureGraph();
+  if (actx.state === 'suspended') actx.resume();
+  audio.play().then(()=>{ state.isPlaying = true; updateUI(); }).catch(()=>{});
+  renderPlaylist();
+  refreshLyricsTrackName();
+}
+function playPause(){
+  if (!state.playlist.length) return;
+  ensureGraph();
+  if (actx.state === 'suspended') actx.resume();
+  if (state.isPlaying){ audio.pause(); state.isPlaying=false; } else { audio.play(); state.isPlaying=true; }
+  updateUI();
+}
+function nextSong(){
+  if (!state.playlist.length) return;
+  const i = state.isShuffled ? Math.floor(Math.random()*state.playlist.length) : (state.currentIndex+1)%state.playlist.length;
+  loadSong(i);
+}
+function prevSong(){
+  if (!state.playlist.length) return;
+  const i = state.isShuffled ? Math.floor(Math.random()*state.playlist.length) : (state.currentIndex-1+state.playlist.length)%state.playlist.length;
+  loadSong(i);
+}
+audio.addEventListener('timeupdate', ()=>{
+  if (audio.duration){
+    progress.style.width = (audio.currentTime/audio.duration*100)+'%';
+    currentTimeEl.textContent = formatTime(audio.currentTime);
+  }
+});
+progressBarContainer.addEventListener('click', e=>{
+  if (!audio.duration) return;
+  const rect = progressBarContainer.getBoundingClientRect();
+  audio.currentTime = ((e.clientX-rect.left)/rect.width) * audio.duration;
+});
+audio.addEventListener('ended', ()=>{
+  if (state.isRepeated){ audio.currentTime=0; audio.play(); } else { nextSong(); }
+});
+function updateUI(){
+  iconPlay.style.display = state.isPlaying ? 'none':'block';
+  iconPause.style.display = state.isPlaying ? 'block':'none';
+  vinyl.classList.toggle('spinning', state.isPlaying);
+  toneArm.classList.toggle('active', state.isPlaying);
+}
+playBtn.addEventListener('click', playPause);
+$('nextBtn').addEventListener('click', nextSong);
+$('prevBtn').addEventListener('click', prevSong);
+$('shuffleBtn').addEventListener('click', ()=>{ state.isShuffled=!state.isShuffled; $('shuffleBtn').classList.toggle('active-btn', state.isShuffled); });
+$('repeatBtn').addEventListener('click', ()=>{ state.isRepeated=!state.isRepeated; $('repeatBtn').classList.toggle('active-btn', state.isRepeated); });
+$('clearBtn').addEventListener('click', ()=>{
+  audio.pause(); audio.src=''; state.playlist=[]; state.isPlaying=false; updateUI();
+  player.classList.remove('active'); uploadArea.style.display='block';
+  refreshLyricsTrackName();
+});
+function formatTime(s){ if(isNaN(s)||s===Infinity) return '0:00'; const m=Math.floor(s/60), sec=Math.floor(s%60); return `${m}:${sec.toString().padStart(2,'0')}`; }
+
+/* ============================================================
+   LYRICS — free CORS lyrics API + on-device transcription
+   NOTE: "Find lyrics online" calls the free public lyrics.ovh
+   API directly from the browser (no server of ours involved).
+   "Transcribe audio" runs an in-browser Whisper model — the
+   first use downloads the model (needs internet once), then
+   everything runs locally on-device.
+============================================================ */
+const lyricsBox = $('lyricsBox');
+function refreshLyricsTrackName(){
+  const song = state.playlist[state.currentIndex];
+  $('lyricsTrackName').textContent = song ? song.name : 'Select a track first';
+  if (song){
+    lyricsBox.innerHTML = song.lyrics
+      ? escapeHtml(song.lyrics).replace(/\n/g,'<br>')
+      : '<div class="lyrics-empty">No lyrics yet for this track. Tap “Find lyrics online” or “Transcribe audio”.</div>';
+  }
+}
+function escapeHtml(s){ const d=document.createElement('div'); d.innerText=s; return d.innerHTML; }
+
+function guessArtistTitle(name){
+  const parts = name.split(/\s*-\s*/);
+  if (parts.length >= 2) return { artist: parts[0].trim(), title: parts.slice(1).join(' - ').trim() };
+  return { artist: '', title: name.trim() };
+}
+
+let notesTimer = null;
+function startLoading(text, eta){
+  $('loadingText').textContent = text;
+  $('loadingEta').textContent = eta;
+  $('loadingWrap').classList.add('active');
+  const wrap = $('notesAnim'); wrap.innerHTML='';
+  const glyphs = ['♪','♫','♬','♩'];
+  notesTimer = setInterval(()=>{
+    const n = document.createElement('span');
+    n.className='note'; n.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+    n.style.left = (10 + Math.random()*80) + '%';
+    n.style.animationDuration = (1.8+Math.random()*1.2)+'s';
+    wrap.appendChild(n);
+    setTimeout(()=>n.remove(), 3200);
+  }, 220);
+}
+function stopLoading(){
+  clearInterval(notesTimer);
+  $('loadingWrap').classList.remove('active');
+}
+
+$('findLyricsBtn').addEventListener('click', async ()=>{
+  const song = state.playlist[state.currentIndex];
+  if (!song){ showToast('Load a track first'); return; }
+  const { artist, title } = guessArtistTitle(song.name);
+  if (!artist){ showToast('Rename file as "Artist - Title" for best results'); }
+  startLoading('Searching the web for lyrics…', 'usually a couple of seconds');
+  try{
+    const url = `https://api.lyrics.ovh/v1/${encodeURIComponent(artist||title)}/${encodeURIComponent(artist?title:'')}`;
+    const res = await fetch(artist ? url : `https://api.lyrics.ovh/v1/${encodeURIComponent(title)}/${encodeURIComponent(title)}`);
+    const data = await res.json();
+    stopLoading();
+    if (data && data.lyrics){
+      song.lyrics = data.lyrics.trim();
+      refreshLyricsTrackName();
+      showToast('Lyrics found');
+    } else {
+      showToast('No exact match found — try "Transcribe audio" instead');
+    }
+  }catch(err){
+    stopLoading();
+    showToast('Search failed — check your connection');
+  }
+});
+
+let asrPipeline = null;
+$('transcribeBtn').addEventListener('click', async ()=>{
+  const song = state.playlist[state.currentIndex];
+  if (!song){ showToast('Load a track first'); return; }
+  startLoading('Loading on-device AI model…', 'first time only, ~15–40s');
+  try{
+    if (!asrPipeline){
+      const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+      asrPipeline = await pipeline('automatic-speech-recognition','Xenova/whisper-tiny', {
+        progress_callback: (p)=>{
+          if (p && p.status==='progress' && p.file){
+            $('loadingText').textContent = `Downloading model: ${p.file}`;
+            $('loadingEta').textContent = `${Math.round(p.progress||0)}%`;
+          }
         }
+      });
+    }
+    $('loadingText').textContent = 'Listening carefully to the audio…';
+    $('loadingEta').textContent = 'estimating from track length';
+    const result = await asrPipeline(song.url, { chunk_length_s: 30, stride_length_s: 5, return_timestamps: false });
+    stopLoading();
+    song.lyrics = (result.text || '').trim();
+    refreshLyricsTrackName();
+    showToast('Transcription ready — review below');
+  }catch(err){
+    stopLoading();
+    console.error(err);
+    showToast('Transcription failed on this device/browser');
+  }
+});
 
-        fileInput.addEventListener('change', e => { handleFiles(e.target.files); fileInput.value = ''; });
+/* Fix-selection workflow */
+let pendingRange = null;
+$('fixSelectionBtn').addEventListener('click', ()=>{
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed || !lyricsBox.contains(sel.anchorNode)){
+    showToast('Select the wrong words in the lyrics first');
+    return;
+  }
+  pendingRange = sel.getRangeAt(0).cloneRange();
+  $('selectedSnip').textContent = '“' + sel.toString().trim() + '”';
+  $('fixTextarea').value = '';
+  $('fixPopover').classList.add('active');
+});
+$('fixCancelBtn').addEventListener('click', ()=> $('fixPopover').classList.remove('active'));
+$('fixApplyBtn').addEventListener('click', ()=>{
+  const song = state.playlist[state.currentIndex];
+  const wrongText = $('selectedSnip').textContent.replace(/^“|”$/g,'');
+  const correction = $('fixTextarea').value.trim();
+  if (song && correction){
+    song.lyrics = song.lyrics.replace(wrongText, correction);
+    refreshLyricsTrackName();
+    showToast('Fixed');
+  }
+  $('fixPopover').classList.remove('active');
+});
 
-        // Playlist Rendering
-        function renderPlaylist() {
-            playlistEl.innerHTML = '';
-            const frag = document.createDocumentFragment();
+$('copyLyricsBtn').addEventListener('click', async ()=>{
+  const song = state.playlist[state.currentIndex];
+  if (!song || !song.lyrics){ showToast('Nothing to copy yet'); return; }
+  try{ await navigator.clipboard.writeText(song.lyrics); showToast('Lyrics copied'); }
+  catch(e){ showToast('Copy failed — select text manually'); }
+});
 
-            state.playlist.forEach((song, i) => {
-                const div = document.createElement('div');
-                div.className = 'playlist-item' + (i === state.currentIndex ? ' active' : '');
-                div.innerHTML = `
-                    <div class="title">${song.name}</div>
-                    <div class="duration">${song.duration}</div>
-                `;
-                div.addEventListener('click', () => loadSong(i));
-                frag.appendChild(div);
-            });
-            playlistEl.appendChild(frag);
-        }
+/* ============================================================
+   VIDEO → AUDIO CONVERTER (ffmpeg.wasm — fully client-side)
+============================================================ */
+let ffmpeg = null, selectedVideo = null, selectedFmt = 'mp3';
+document.querySelectorAll('.format-chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.format-chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    selectedFmt = chip.dataset.fmt;
+  });
+});
+$('videoInput').addEventListener('change', e=>{
+  const f = e.target.files[0];
+  if (!f) return;
+  selectedVideo = f;
+  $('convertFileName').textContent = f.name;
+  $('resultCard').classList.remove('active');
+});
 
-        // Song Logic
-        function loadSong(index) {
-            if (index < 0 || index >= state.playlist.length) return;
-            state.currentIndex = index;
-            const song = state.playlist[index];
-
-            audio.src = song.url;
-            audio.load();
-
-            currentTitle.textContent = song.name;
-            vinylTitle.textContent = song.name.length > 20 ? song.name.substring(0, 20) + '...' : song.name;
-            
-            audio.addEventListener('loadedmetadata', () => {
-                song.duration = formatTime(audio.duration);
-                totalTimeEl.textContent = song.duration;
-                renderPlaylist();
-            }, { once: true });
-
-            audio.play().then(() => {
-                state.isPlaying = true;
-                updateUI();
-            }).catch(() => {});
-            
-            renderPlaylist();
-        }
-
-        function playPause() {
-            if (!state.playlist.length) return;
-            if (state.isPlaying) { audio.pause(); state.isPlaying = false; }
-            else { audio.play(); state.isPlaying = true; }
-            updateUI();
-        }
-
-        function nextSong() {
-            if (!state.playlist.length) return;
-            let nextIndex = state.isShuffled 
-                ? Math.floor(Math.random() * state.playlist.length) 
-                : (state.currentIndex + 1) % state.playlist.length;
-            loadSong(nextIndex);
-        }
-
-        function prevSong() {
-            if (!state.playlist.length) return;
-            let prevIndex = state.isShuffled 
-                ? Math.floor(Math.random() * state.playlist.length) 
-                : (state.currentIndex - 1 + state.playlist.length) % state.playlist.length;
-            loadSong(prevIndex);
-        }
-
-        // Progress Updating
-        audio.addEventListener('timeupdate', () => {
-            if (audio.duration) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                progress.style.width = percent + '%';
-                currentTimeEl.textContent = formatTime(audio.currentTime);
-            }
-        });
-
-        // Seek (Click on Progress Bar)
-        progressBarContainer.addEventListener('click', (e) => {
-            if (!audio.duration) return;
-            const rect = progressBarContainer.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const width = rect.width;
-            const clickRatio = clickX / width;
-            audio.currentTime = clickRatio * audio.duration;
-        });
-
-        // Loop / Next on End
-        audio.addEventListener('ended', () => {
-            if (state.isRepeated) {
-                audio.currentTime = 0;
-                audio.play();
-            } else {
-                nextSong();
-            }
-        });
-
-        // UI Updates
-        function updateUI() {
-            iconPlay.style.display = state.isPlaying ? 'none' : 'block';
-            iconPause.style.display = state.isPlaying ? 'block' : 'none';
-
-            if (state.isPlaying) {
-                vinyl.classList.add('spinning');
-                toneArm.classList.add('active');
-            } else {
-                vinyl.classList.remove('spinning');
-                toneArm.classList.remove('active');
-            }
-        }
-
-        // Toggles & Actions
-        playBtn.addEventListener('click', playPause);
-        nextBtn.addEventListener('click', nextSong);
-        prevBtn.addEventListener('click', prevSong);
-
-        shuffleBtn.addEventListener('click', () => {
-            state.isShuffled = !state.isShuffled;
-            shuffleBtn.classList.toggle('active-btn', state.isShuffled);
-        });
-
-        repeatBtn.addEventListener('click', () => {
-            state.isRepeated = !state.isRepeated;
-            repeatBtn.classList.toggle('active-btn', state.isRepeated);
-        });
-
-        clearBtn.addEventListener('click', () => {
-            audio.pause();
-            audio.src = '';
-            state.playlist = [];
-            state.isPlaying = false;
-            updateUI();
-            player.classList.remove('active');
-            uploadArea.style.display = 'block';
-        });
-
-        function formatTime(seconds) {
-            if (isNaN(seconds) || seconds === Infinity) return '0:00';
-            const m = Math.floor(seconds / 60);
-            const s = Math.floor(seconds % 60);
-            return `${m}:${s.toString().padStart(2, '0')}`;
-        }
-    </script>
+$('convertBtn').addEventListener('click', async ()=>{
+  if (!selectedVideo){ showToast('Choose a video file first'); return; }
+  $('convertProgressWrap').classList.add('active');
+  $('resultCard').classList.remove('active');
+  const fill = $('convertProgressFill'), text = $('convertProgressText');
+  try{
+    if (!ffmpeg){
+      text.textContent = 'Loading converter engine…'; fill.style.width='10%';
+      const { FFmpeg } = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js');
+      const { toBlobURL } = await import('https://unpkg.com/@ffmpeg/util@0.12.1/dist/esm/index.js');
+      ffmpeg = new FFmpeg();
+      ffmpeg.on('progress', ({progress})=>{ fill.style.width = Math.min(95, 20 + progress*75) + '%'; });
+      const base = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
+      await ffmpeg.load({
+        coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
+        wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm'),
+      });
+      fill.style.width='20%';
+    }
+    text.textContent = 'Converting…';
+    const { fetchFile } = await import('https://unpkg.com/@ffmpeg/util@0.12.1/dist/esm/index.js');
+    const inName = 'input' + (selectedVideo.name.match(/\.[^.]+$/)?.[0] || '.mp4');
+    const outName = `output.${selectedFmt}`;
+    await ffmpeg.writeFile(inName, await fetchFile(selectedVideo));
+    const codecArgs = selectedFmt==='wav' ? [] : selectedFmt==='m4a' ? ['-c:a','aac'] : selectedFmt==='ogg' ? ['-c:a','libvorbis'] : ['-c:a','libmp3lame'];
+    await ffmpeg.exec(['-i', inName, '-vn', ...codecArgs, outName]);
+    const data = await ffmpeg.readFile(outName);
+    const mime = { mp3:'audio/mpeg', wav:'audio/wav', m4a:'audio/mp4', ogg:'audio/ogg' }[selectedFmt];
+    const blob = new Blob([data.buffer], { type: mime });
+    const url = URL.createObjectURL(blob);
+    fill.style.width='100%'; text.textContent='Done';
+    const dl = $('downloadResultBtn'); dl.href = url; dl.download = (selectedVideo.name.replace(/\.[^.]+$/,'') || 'audio') + '.' + selectedFmt;
+    $('resultCard').classList.add('active');
+    showToast('Conversion complete');
+  }catch(err){
+    console.error(err);
+    text.textContent = 'Conversion failed on this device/browser';
+    showToast('Conversion failed');
+  }
+});
+</script>
 </body>
 </html>
