@@ -19,7 +19,7 @@ Tout ce qui touche au son se passe **sur votre machine** : lecture, égaliseur, 
 C'est un outil pour ceux qui aiment écouter, vraiment écouter. Prendre une chanson, la régler, la laisser tourner.
 
 ---
-
+<!-- 
 ## 📸 Un aperçu
 
 <div align="center">
@@ -45,7 +45,7 @@ C'est un outil pour ceux qui aiment écouter, vraiment écouter. Prendre une cha
 </div>
 
 ---
-
+-->
 ## ✨ Ce que vous trouverez
 
 **Un vinyle qui tourne vraiment.**  
