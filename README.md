@@ -1,324 +1,127 @@
+<div align="center">
+
 # 🎵 MP88 — Studio Vinyle & Audio
 
-**MP88** est un lecteur audio professionnel avec **égaliseur 8 bandes**, **effets spatiaux 8D/4D**, **recherche de paroles en ligne**, **transcription audio locale** (Whisper AI) et **convertisseur vidéo→audio** (ffmpeg.wasm). Tout fonctionne dans votre navigateur.
+**Un lecteur audio, avec l'âme d'un tourne-disque.**
+
+</div>
 
 ---
 
-## 📋 Prérequis
+## 👋 Bienvenue
 
-1. Un navigateur web moderne (Chrome, Firefox, Edge, Safari)
-2. Connexion Internet requise pour :
-   - Recherche de paroles (API lyrics.ovh)
-   - Transcription audio (premier téléchargement du modèle Whisper)
-   - Convertisseur vidéo (premier téléchargement de ffmpeg.wasm)
-3. Aucune installation de logiciel nécessaire
+MP88 est un lecteur audio qui prend son temps.
 
----
+Vous y déposez vos morceaux, et un vinyle se met à tourner. Vous ajustez le son, vous jouez avec la spatialisation, vous cherchez les paroles, vous transcrivez à la volée. Et si un jour une vidéo contient une chanson que vous voulez garder, l'outil peut en extraire l'audio — sans jamais quitter votre navigateur.
 
-## 🚀 Guide d'installation
+Tout ce qui touche au son se passe **sur votre machine** : lecture, égaliseur, effets spatiaux, transcription, conversion. Seule la recherche de paroles en ligne envoie le nom du morceau à un service externe — et c'est clairement indiqué.
 
-### Étape 1 : Télécharger le fichier
-1. Téléchargez le fichier `mp88.html` sur votre ordinateur
-2. Placez-le dans un dossier de votre choix
-
-### Étape 2 : Lancer l'application
-- **Double-cliquez** sur le fichier pour l'ouvrir dans votre navigateur
+C'est un outil pour ceux qui aiment écouter, vraiment écouter. Prendre une chanson, la régler, la laisser tourner.
 
 ---
 
-## 🎯 Fonctionnalités principales
+## 📸 Un aperçu
 
-### 🎧 1. Lecteur Audio
+<div align="center">
+  <img src="https://github.com/mohamed005cheikh-rgb/mp-mc88/raw/main/images/Sc1.png" alt="Lecteur vinyle et playlist" width="100%" />
+</div>
 
-**Formats supportés :**
-| Format | Extension |
-|--------|-----------|
-| MP3 | `.mp3` |
-| WAV | `.wav` |
-| M4A | `.m4a` |
-| FLAC | `.flac` |
-| OGG | `.ogg` |
+<br />
 
-**Fonctionnalités :**
-- Lecture/Pause avec animation vinyle
-- Précédent/Suivant
-- Mode aléatoire (Shuffle)
-- Mode répétition
-- Barre de progression cliquable
-- Playlist avec noms et durées
+<div align="center">
+  <img src="https://github.com/mohamed005cheikh-rgb/mp-mc88/raw/main/images/Sc2.png" alt="Égaliseur et effets spatiaux" width="100%" />
+</div>
 
----
+<br />
 
-### 🎚️ 2. Égaliseur 8 Préréglages
+<div align="center">
+  <img src="https://github.com/mohamed005cheikh-rgb/mp-mc88/raw/main/images/Sr1.gif" alt="Chercher les paroles et les corriger" width="100%" />
+</div>
 
-| Préréglage | Description |
-|-----------|-------------|
-| **Flat** | Aucun ajustement (neutre) |
-| **Bass Boost** | Graves amplifiés (+8 dB à 200 Hz) |
-| **Vocal Boost** | Voix mises en avant (+5 dB à 1 kHz) |
-| **Treble** | Aigus amplifiés (+7 dB à 6 kHz) |
-| **Rock** | Graves et aigus boostés |
-| **Pop** | Équilibre général |
-| **Classical** | Léger boost des extrêmes |
-| **Lo-Fi** | Réduction des médiums (-6 dB à 6 kHz) |
+<br />
 
-**Filtres utilisés :**
-- Low Shelf (200 Hz)
-- Peaking 1 (1 kHz)
-- Peaking 2 (3 kHz)
-- High Shelf (6 kHz)
+<div align="center">
+  <img src="https://github.com/mohamed005cheikh-rgb/mp-mc88/raw/main/images/Sr2.gif" alt="Convertir une vidéo en audio" width="100%" />
+</div>
 
 ---
 
-### 🌌 3. Effets Spatiaux
+## ✨ Ce que vous trouverez
 
-| Effet | Description |
-|-------|-------------|
-| **Off** | Son stéréo normal |
-| **8D Audio** | Rotation complète en 9 secondes |
-| **4D Audio** | Rotation rapide en 4.5 secondes |
-| **Wide Stereo** | Élargissement stéréo subtil |
+**Un vinyle qui tourne vraiment.**  
+Vous déposez un morceau, et la platine s'anime — le disque tourne, le bras se déplace. La playlist se remplit toute seule, avec les noms et les durées détectés automatiquement. Vous pouvez passer au morceau suivant, revenir en arrière, activer la lecture aléatoire, ou répéter une piste en boucle.
 
-**Effets visuels :**
-- Point lumineux orbitant autour du vinyle (8D/4D)
-- Modulation du volume (0.85 à 1.0)
+**Huit préréglages pour écouter à votre façon.**  
+Neutre, graves amplifiés, voix mises en avant, aigus, rock, pop, classique, lo-fi. Chacun ajuste les quatre bandes essentielles — les basses, la présence vocale, la clarté, les aigus — pour que la musique sonne comme vous l'aimez.
 
----
+**Des effets spatiaux pour changer d'espace.**  
+Le mode **8D** fait tourner le son autour de votre tête en neuf secondes. Le mode **4D** le fait plus vite, en quatre secondes et demie. Le mode **Wide Stereo** élargit discrètement l'image sonore. Le tout accompagné d'un point lumineux qui orbite autour du vinyle, en rythme avec l'effet.
 
-### 📝 4. Paroles (Lyrics)
+**Les paroles, de deux manières.**  
+Vous pouvez chercher en ligne — l'outil interroge une base publique, et trouve souvent ce qu'il faut si le fichier est bien nommé (du genre `Artiste - Titre.mp3`). Ou vous pouvez demander une **transcription locale** : un petit modèle IA analyse le morceau et écrit ce qu'il entend, sans rien envoyer sur un serveur. Si une phrase est mal comprise, vous la sélectionnez, cliquez sur « Fix selection », et vous la corrigez à la main.
 
-**Deux méthodes :**
+**Convertir une vidéo en audio.**  
+Vous avez un MP4, un MOV, un MKV ou un WEBM qui contient une chanson ? Déposez-le, choisissez le format de sortie (MP3, WAV, M4A, OGG), et l'outil en extrait la bande son. Tout se fait **localement**, grâce à une version de ffmpeg compilée pour le navigateur. Rien n'est téléversé.
 
-#### Méthode A : Recherche en ligne
-1. Cliquez sur **« Find lyrics online »**
-2. Utilise l'API gratuite lyrics.ovh
-3. Nécessite une connexion Internet
-4. Meilleur résultat si le fichier est nommé `Artiste - Titre.mp3`
-
-#### Méthode B : Transcription locale
-1. Cliquez sur **« Transcribe audio »**
-2. Utilise le modèle Whisper Tiny (IA)
-3. Premier téléchargement : ~15-40 secondes
-4. Ensuite, tout fonctionne **localement**
-5. Aucune donnée envoyée sur un serveur
-
-**Correction des paroles :**
-1. Sélectionnez le texte incorrect
-2. Cliquez sur **« Fix selection »**
-3. Tapez la correction
-4. Cliquez sur **« Apply fix »**
+**Quatre ambiances pour l'interface.**  
+Sombre avec accents dorés, clair et épuré, bleu océan, orange coucher de soleil — selon l'heure et l'humeur, vous changez d'atmosphère d'un clic.
 
 ---
 
-### 🔄 5. Convertisseur Vidéo → Audio
+## 🧭 Comment ça marche
 
-**Formats d'entrée :**
-| Format | Extension |
-|--------|-----------|
-| MP4 | `.mp4` |
-| MOV | `.mov` |
-| MKV | `.mkv` |
-| WEBM | `.webm` |
+**1. Déposez vos morceaux.**  
+Cliquez sur la zone d'import, ou glissez-déposez plusieurs fichiers d'un coup. La playlist se remplit, et la lecture démarre.
 
-**Formats de sortie :**
-| Format | Codec | Extension |
-|--------|-------|-----------|
-| MP3 | libmp3lame | `.mp3` |
-| WAV | PCM (sans perte) | `.wav` |
-| M4A | AAC | `.m4a` |
-| OGG | libvorbis | `.ogg` |
+**2. Réglez le son.**  
+Choisissez un préréglage d'égaliseur, puis un effet spatial si vous voulez. Le vinyle tourne, le bras se pose, et vous écoutez.
 
-**Fonctionnement :**
-- Utilise ffmpeg.wasm (compilé en WebAssembly)
-- 100% client-side (aucun upload)
-- Premier chargement : ~10-20 Mo de téléchargement
-- Ensuite, tout fonctionne hors ligne
+**3. Cherchez ou transcrivez les paroles.**  
+Dans l'onglet *Lyrics*, choisissez entre la recherche en ligne — rapide, mais pas toujours disponible — ou la transcription locale, plus longue la première fois, mais qui reste chez vous.
+
+**4. Convertissez, si besoin.**  
+Dans l'onglet *Convert*, déposez une vidéo, choisissez le format, et laissez l'outil travailler. Le fichier audio se télécharge automatiquement à la fin.
+
+À chaque étape, rien n'est définitif — vous pouvez revenir en arrière, changer d'avis, reprendre un morceau là où vous l'aviez laissé.
 
 ---
 
-## 🎨 Thèmes
+## 🛠️ Petits coups de main
 
-L'application propose **4 thèmes** :
+**L'audio ne démarre pas ?**  
+Vérifiez le format — MP3, WAV, M4A, FLAC et OGG sont acceptés. Si le fichier est corrompu, essayez-en un autre. Et bien sûr, jetez un œil au volume.
 
-| Thème | Ambiance |
-|-------|----------|
-| **Dark** (défaut) | Sombre avec accents dorés |
-| **Light** | Clair et épuré |
-| **Ocean** | Bleu océan |
-| **Sunset** | Orange coucher de soleil |
+**L'égaliseur reste sans effet ?**  
+Il s'active **après la première lecture**. Lancez un morceau, puis ajustez — les filtres prendront vie immédiatement.
 
-**Changer de thème** : Cliquez sur l'icône lune/soleil dans l'en-tête.
+**Les effets 8D / 4D sont discrets ?**  
+Utilisez un **casque stéréo**. Sur haut-parleurs, l'effet reste perceptible mais bien plus subtil. C'est le propre de la spatialisation.
 
----
+**La recherche de paroles échoue ?**  
+La base publique ne contient pas toutes les chansons. Renommez votre fichier en `Artiste - Titre.mp3` et réessayez — ou passez à la transcription locale.
 
-## 📖 Guide d'utilisation détaillé
+**La transcription met du temps au début ?**  
+Le premier lancement télécharge le petit modèle Whisper (~40 Mo). Une seule fois. Ensuite, tout se fait hors ligne, en local.
 
-### 🔹 Étape 1 : Charger des fichiers audio
+**La conversion vidéo ne démarre pas ?**  
+Essayez une vidéo plus courte (moins de 100 Mo) et fermez les autres onglets gourmands. La conversion demande pas mal de mémoire — surtout sur un téléphone.
 
-1. Cliquez sur la **zone de téléchargement**
-2. Ou glissez-déposez vos fichiers
-3. Sélectionnez un ou plusieurs fichiers audio
-4. La playlist se remplit automatiquement
-5. Le premier fichier commence à jouer
-
-### 🔹 Étape 2 : Contrôler la lecture
-
-- **Lecture/Pause** : Bouton central
-- **Suivant/Précédent** : Flèches latérales
-- **Shuffle** : Lecture aléatoire
-- **Repeat** : Répétition de la piste
-- **Progression** : Cliquez sur la barre pour naviguer
-
-### 🔹 Étape 3 : Ajuster le son
-
-1. Choisissez un **préréglage d'égaliseur**
-2. Choisissez un **effet spatial** (8D, 4D, Wide)
-3. Le vinyle tourne pendant la lecture
-4. Le bras de lecture s'anime
-
-### 🔹 Étape 4 : Obtenir les paroles
-
-1. Sélectionnez une piste
-2. Allez dans l'onglet **« Lyrics »**
-3. Choisissez : recherche en ligne ou transcription
-4. Corrigez les erreurs avec « Fix selection »
-5. Copiez avec « Copy lyrics »
-
-### 🔹 Étape 5 : Convertir une vidéo
-
-1. Allez dans l'onglet **« Convert »**
-2. Choisissez un fichier vidéo
-3. Sélectionnez le format de sortie
-4. Cliquez sur **« Convert to audio »**
-5. Téléchargez le fichier audio
+**La transcription échoue sur mobile ?**  
+C'est un cas connu. La transcription Whisper est gourmande en mémoire. Utilisez un ordinateur pour cette fonction, ou essayez un extrait plus court.
 
 ---
 
-## 🛠️ Guide de dépannage
+<div align="center">
 
-### Problème 1 : L'audio ne joue pas
+### 📞 Une question, une idée ?
 
-**Cause** : Format non supporté ou fichier corrompu.
+[![Email](https://img.shields.io/badge/Email-mohamed005cheikh@gmail.com-d14836?style=flat-square&logo=gmail&logoColor=white)](mailto:mohamed005cheikh@gmail.com)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-+222_30_72_64_75-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/22230726475)
 
-**Solution** :
-- Vérifiez que le format est MP3, WAV, M4A, FLAC ou OGG
-- Essayez avec un autre fichier
-- Vérifiez que le volume n'est pas à zéro
+<br />
 
----
+*Bonne écoute.*
 
-### Problème 2 : L'égaliseur ne fonctionne pas
+<sub>© 2026 Mohamed Cheikh — MC88</sub>
 
-**Cause** : Le contexte audio n'est pas initialisé.
-
-**Solution** :
-- Cliquez sur **Play** d'abord (l'audio doit démarrer)
-- L'égaliseur s'active après la première interaction
-- Vérifiez que le navigateur supporte Web Audio API
-
----
-
-### Problème 3 : Les effets 8D/4D ne sont pas perceptibles
-
-**Cause** : Le son est en mono ou le casque est mal réglé.
-
-**Solution** :
-- Utilisez un **casque stéréo** pour un effet optimal
-- Les effets sont plus subtils sur des haut-parleurs
-- Vérifiez que l'effet est bien activé (chip en surbrillance)
-
----
-
-### Problème 4 : La recherche de paroles échoue
-
-**Cause** : La chanson n'est pas dans la base de données lyrics.ovh.
-
-**Solution** :
-- Renommez le fichier en `Artiste - Titre.mp3`
-- Essayez la transcription audio à la place
-- Vérifiez votre connexion Internet
-
----
-
-### Problème 5 : La transcription est lente
-
-**Cause** : Premier téléchargement du modèle Whisper (~40 Mo).
-
-**Solution** :
-- Attendez que le téléchargement se termine (une seule fois)
-- Le modèle est mis en cache pour les utilisations futures
-- Les pistes plus longues prennent plus de temps
-
----
-
-### Problème 6 : La conversion vidéo échoue
-
-**Cause** : Format vidéo non supporté ou mémoire insuffisante.
-
-**Solution** :
-- Utilisez des vidéos plus courtes (< 100 Mo)
-- Essayez un format courant (MP4)
-- Fermez les autres onglets gourmands
-- Vérifiez que le navigateur supporte WebAssembly
-
----
-
-### Problème 7 : La transcription ne fonctionne pas sur mobile
-
-**Cause** : Mémoire insuffisante sur l'appareil.
-
-**Solution** :
-- Utilisez un ordinateur pour la transcription
-- Fermez les autres applications
-- Essayez avec une piste plus courte
-
----
-
-## 📄 Copyright
-
-**© 2026**  
-📧 mohamed005cheikh@gmail.com  
-**Développé par MC88**  
-**Tous droits réservés**
-
----
-
-## 🔒 Confidentialité
-
-| Fonctionnalité | Traitement |
-|----------------|------------|
-| **Lecture audio** | 100% local |
-| **Égaliseur** | 100% local (Web Audio API) |
-| **Effets spatiaux** | 100% local |
-| **Recherche de paroles** | Envoie le nom à lyrics.ovh |
-| **Transcription audio** | 100% local (Whisper en navigateur) |
-| **Conversion vidéo** | 100% local (ffmpeg.wasm) |
-
----
-
-## 🔧 Bibliothèques utilisées
-
-| Bibliothèque | Version | Usage |
-|-------------|---------|-------|
-| **Transformers.js** | 2.17.2 | Transcription Whisper |
-| **ffmpeg.wasm** | 0.12.10 | Conversion vidéo |
-| **Web Audio API** | Natif | Égaliseur et effets |
-
----
-
-## ✅ Fonctionnalités techniques
-
-- **Vinyle animé** avec rotation synchronisée
-- **Bras de lecture** avec animation
-- **Égaliseur 4 filtres** (Low Shelf, Peaking ×2, High Shelf)
-- **Effets spatiaux** avec StereoPanner
-- **Playlist** avec durées auto-détectées
-- **4 thèmes** persistants
-- **Transcription Whisper Tiny** en WebAssembly
-- **Conversion ffmpeg** en WebAssembly
-- **Correction de paroles** avec sélection
-- **Design responsive** mobile-first
-
----
-
-**Bonne écoute ! 🎵✨**
+</div>
